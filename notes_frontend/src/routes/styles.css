@@ -2,36 +2,328 @@
  * Ultralight template styles - minimal and clean
  */
 
-.page-container {
+/* App layout */
+.notes-app {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   min-height: 100vh;
-  padding: 2rem;
+  height: 100vh;
+  background: var(--background-color);
 }
 
-.main-title {
-  font-size: 3rem;
-  font-weight: 300;
-  text-align: center;
+.header {
+  height: 56px;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2rem;
+  font-size: 1.6rem;
+  font-weight: bold;
   color: var(--primary-color);
-  margin: 0;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  box-shadow: var(--shadow);
+  letter-spacing: 1px;
 }
 
-@media (max-width: 768px) {
-  .main-title {
-    font-size: 2rem;
+.logo {
+  color: var(--primary-color);
+  font-size: 1.4em;
+  letter-spacing: 0.07em;
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.notes-list {
+  width: var(--note-list-width);
+  min-width: 180px;
+  max-width: 320px;
+  background: #fff;
+  border-right: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.notes-list-header {
+  padding: 1rem 1.2rem 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--secondary-color);
+}
+
+.notes-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.note-list-item {
+  padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+  border-bottom: 1px solid #f2f2f2;
+  cursor: pointer;
+  background: #fff;
+  color: var(--secondary-color);
+  transition: background 0.13s;
+  display: flex;
+  flex-direction: column;
+  outline: none !important;
+}
+
+.note-list-item.selected,
+.note-list-item:focus,
+.note-list-item:hover {
+  background: #f7f9fc;
+  color: var(--primary-color);
+}
+
+.note-title-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-title {
+  font-weight: bold;
+  color: var(--primary-color);
+  font-size: 1.08em;
+  margin-right: 12px;
+  word-break: break-all;
+}
+
+.note-date {
+  font-size: 0.83em;
+  color: #888;
+  margin-top: 0.15rem;
+}
+
+.delete-btn {
+  border: none;
+  background: none;
+  color: var(--error-color);
+  font-size: 1.1em;
+  cursor: pointer;
+  padding: 0.15em 0.45em;
+  border-radius: 3px;
+  transition: background 0.16s;
+  margin-left: 6px;
+}
+
+.delete-btn:hover,
+.delete-btn:focus {
+  background: #ffd6a5;
+}
+
+.editor-section {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  min-width: 0;
+  padding: 0 0.5rem;
+  position: relative;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.9rem 0.2rem 0.5rem 0.2rem;
+}
+
+.primary-btn,
+.save-btn {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.48em 1.25em;
+  font-size: 1em;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-right: 0.1em;
+  transition: background 0.18s;
+}
+
+.primary-btn:disabled,
+.save-btn:disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.primary-btn:hover,
+.save-btn:hover {
+  background: #1565c0;
+}
+
+.secondary-btn,
+.edit-btn {
+  background: #fff;
+  color: var(--primary-color);
+  border: 1.5px solid var(--primary-color);
+  padding: 0.48em 1.18em;
+  font-size: 1em;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.17s, color 0.17s;
+}
+
+.secondary-btn:hover,
+.edit-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.note-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 1.3rem 0 0 0;
+  max-width: 700px;
+}
+
+.note-title-input {
+  font-size: 1.14em;
+  font-weight: 600;
+  padding: 0.66em 0.5em;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  background: #f9fafd;
+  outline: none;
+  transition: border 0.18s;
+}
+.note-title-input:focus {
+  border: 1.7px solid var(--primary-color);
+}
+
+.note-content-input {
+  font-size: 1em;
+  min-height: 140px;
+  padding: 0.71em 0.5em;
+  resize: vertical;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  outline: none;
+  transition: border 0.18s;
+  background: #f9fafd;
+}
+.note-content-input:focus {
+  border: 1.7px solid var(--primary-color);
+}
+
+.note-editor-actions {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.1rem;
+}
+
+.note-viewer {
+  margin-top: 2.5rem;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.note-viewer-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.note-viewer h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.note-viewer-meta {
+  color: #777;
+  font-size: 0.98em;
+  margin-bottom: 0.33rem;
+}
+
+.note-viewer-content {
+  background: #f6f8fc;
+  border-radius: 3px;
+  padding: 1.1em 0.8em 1.1em 1em;
+  min-height: 110px;
+  font-size: 1.11em;
+  color: var(--secondary-color);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.form-error {
+  color: var(--error-color);
+  background: #ffeaea;
+  border-radius: 3px;
+  padding: 0.63em 0.8em;
+  font-size: 1em;
+  margin: 0.4em 0;
+}
+
+.empty-note-msg {
+  padding: 2.5rem 0.8rem 1.5rem 0.8rem;
+  color: #919191;
+  font-style: italic;
+  font-size: 1.13em;
+  text-align: left;
+}
+
+.loading {
+  font-size: 1.02em;
+  color: #888;
+  margin: 1.2rem 0;
+}
+
+/* responsiveness */
+@media (max-width: 900px) {
+  .notes-list {
+    width: 145px;
+    min-width: 110px;
+    font-size: 0.99em;
   }
-  
-  .page-container {
-    padding: 1rem;
+}
+
+@media (max-width: 670px) {
+  .notes-app {
+    font-size: 93%;
+  }
+  .main-area {
+    flex-direction: column;
+  }
+  .notes-list {
+    width: 98vw;
+    max-width: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: none;
+    min-width: 0;
+  }
+  .editor-section {
+    padding: 0 0.2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .main-title {
-    font-size: 1.5rem;
+  .header {
+    padding: 0 0.7rem;
+    font-size: 1rem;
+  }
+  .note-viewer h2 {
+    font-size: 1.2rem;
   }
 }
